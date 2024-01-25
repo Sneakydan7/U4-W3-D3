@@ -5,8 +5,9 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "evento")
-public class Evento {
+public abstract class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -20,11 +21,10 @@ public class Evento {
     private TipoEvento tipoEvento;
     private Integer numeroMassimoPartecipanti;
 
-    @OneToOne
-    @JoinColumn(name = "location")
+    @ManyToOne
+   
     private Location location;
-    @OneToMany
-    @JoinColumn(name = "partecipazioni")
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.REMOVE)
     private Set<Partecipazione> partecipazioni;
 
     public Location getLocation() {

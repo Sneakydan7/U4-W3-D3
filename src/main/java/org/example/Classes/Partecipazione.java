@@ -10,7 +10,7 @@ public class Partecipazione {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "persona_id")
     private Persona persona;
 
